@@ -1,0 +1,11 @@
+services:
+  php:
+    image: fsilva/php:8.3-apache
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - 8080:80
+    environment:
+      - USE_XDEBUG=yes
+      - XDEBUG_MODE=develop,debug,coverage
+      - ENABLE_OPCACHE=no
