@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block html_title %}Pantry Pal{% endblock %}
+
+{% block body_class %}has-navbar-fixed-top{% endblock %}
+
+{% block page_content %}
+    {{ include("includes/nav-bar.html.twig") }}
+    <div class="container pt-5">
+        {% block main_content %}
+
+        {% endblock %}
+    </div>
+{% endblock %}

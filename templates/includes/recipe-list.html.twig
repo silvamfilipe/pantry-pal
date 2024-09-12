@@ -1,0 +1,7 @@
+<div class="grid is-col-min-14 is-column-gap-5 is-row-gap-5">
+    {% for recipe in recipes %}
+        <div class="cell">
+            {{ include("includes/recipe-card.html.twig") }}
+        </div>
+    {% endfor %}
+</div>
