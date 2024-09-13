@@ -1,0 +1,29 @@
+{% extends "page.html.twig" %}
+
+{% block main_content %}
+    <h1 class="title">{{ recipe.name }}</h1>
+    <div class="columns mb-3">
+        <div class="column is-3">
+            <img class="image is-fullwidth" src="{{ recipe.imagePath }}" alt="{{ recipe.name }}" />
+        </div>
+        <div class="column is-3">
+            <div class="content">
+                <h3 class="title is-size-4">Ingredients:</h3>
+                <ul>
+                    {% for ingredient in recipe.ingredients %}
+                        <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="content">
+                <h3 class="title is-size-4">Instructions:</h3>
+                <div class="is-size-5">{{ recipe.instructions }}</div>
+            </div>
+        </div>
+    </div>
+
+    <a class="button is-light" href="{{ referer ? referer : path("recipes") }}">Go back</a>
+{% endblock %}

@@ -13,6 +13,7 @@ namespace App\UserInterface;
 
 use App\Domain\RecipeRepository;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Slick\Template\UserInterface\TemplateMethods;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -31,8 +32,35 @@ final class RecipesController
     }
 
     #[Route(path: "/", name: "recipes")]
-    public function allRecipes(): ResponseInterface
+    public function allRecipes(ServerRequestInterface $request): ResponseInterface
     {
-        return $this->render("recipes/all.html.twig", ['recipes' => $this->recipes->all()]);
+        $query = $this->retrieveQuery($request);
+        return $this->render(
+            "recipes/all.html.twig",
+            [
+                'recipes' => $query
+                    ? $this->recipes->searchBy($query)
+                    : $this->recipes->all(),
+                'query' => $query
+            ]
+        );
+    }
+
+    #[Route(path: "/recipe/{recipeId}", name: "recipe")]
+    public function recipe(string $recipeId, ServerRequestInterface $request): ResponseInterface
+    {
+        $referer = $request->getHeaderLine("Referer");
+        $recipe = $this->recipes->withRecipeId(strip_tags($recipeId));
+        return $this->render('recipes/recipe.html.twig', compact('recipe', 'referer'));
+    }
+
+    private function retrieveQuery(ServerRequestInterface $request): ?string
+    {
+        $query = $request->getQueryParams();
+        if (!array_key_exists("q", $query)) {
+            return null;
+        }
+
+        return strip_tags($query["q"]);
     }
 }

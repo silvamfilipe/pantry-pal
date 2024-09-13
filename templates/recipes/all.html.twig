@@ -1,6 +1,12 @@
 {% extends "page.html.twig" %}
 
 {% block main_content %}
-    <h1 class="title">All recipes</h1>
+    <h1 class="title is-hidden-touch">
+        {% if query %}
+            Results containing "{{ query }}"
+        {% else %}
+            All recipes
+        {% endif %}
+    </h1>
     {{ include("includes/recipe-list.html.twig") }}
 {% endblock %}

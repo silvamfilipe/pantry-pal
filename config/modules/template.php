@@ -10,6 +10,6 @@ return [
         'debug' => isset($_ENV["APP_ENV"]) ? $_ENV["APP_ENV"] == 'develop' : false,
     ],
     'framework' => 'bulma',
-    'theme' => 'sandstone'
+    'theme' => 'pulse'
 ];
  

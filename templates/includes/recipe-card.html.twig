@@ -1,18 +1,18 @@
-<div class="card">
-    <div class="card-image">
-        <figure class="image">
-            <img src="{{ recipe.imagePath }}" alt="{{ recipe.name }}" />
-        </figure>
-    </div>
+<a href="{{ path("recipe", {"recipeId": recipe.recipeId}) }}">
+    <div class="card">
+        <div class="card-image">
+            <figure class="image">
+                <img src="{{ recipe.imagePath }}" alt="{{ recipe.name }}" />
+            </figure>
+        </div>
 
-    <div class="card-content">
-        <div class="content">
-            <h3 class="title">{{ recipe.name }}</h3>
-            {{ recipe.instructions|truncate(100) }}
-            <hr />
-            <div class="is-flex is-justify-content-flex-end">
-                <a href="#">View recipe...</a>
-            </div>
+        <div class="card-content">
+
+                <div class="content">
+                    <h3 class="title">{{ recipe.name }}</h3>
+                    {{ recipe.instructions|truncate(100) }}
+                </div>
+
         </div>
     </div>
-</div>
+</a>
